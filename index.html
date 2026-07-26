@@ -1,52 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="vintage">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SORRA WORKS // RETRO PLATFORM</title>
+  <title>SORRA WORKS // VINTAGE PRESS</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* RETRO THEME STYLES */
+    /* STYLES THEO PHONG CÁCH VINTAGE MAGAZINE */
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-card: #12121a;
-      --text-main: #00ffcc;
-      --text-muted: #ff71ce;
-      --accent: #ff007f;
-      --border: #00ffcc;
-      --font-retro: 'Courier New', Courier, monospace;
-    }
-
-    [data-theme="light"] {
       --bg-primary: #f4ebd9;
       --bg-card: #fffcf0;
-      --text-main: #111111;
-      --text-muted: #d9534f;
+      --text-main: #2b261f;
+      --text-muted: #706351;
+      --accent: #8b261d; /* Màu đỏ đô vintage */
+      --border: #2b261f;
+      --font-vintage: 'Georgia', 'Times New Roman', serif;
+    }
+
+    [data-theme="dark-vintage"] {
+      --bg-primary: #1c1a17;
+      --bg-card: #26231e;
+      --text-main: #e8ded1;
+      --text-muted: #a69886;
       --accent: #d9534f;
-      --border: #111111;
+      --border: #e8ded1;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--font-retro);
+      font-family: var(--font-vintage);
       background-color: var(--bg-primary);
       color: var(--text-main);
-      line-height: 1.5;
+      line-height: 1.6;
+      transition: all 0.3s ease;
     }
 
-    /* HEADER RETRO */
+    /* HEADER & NAVIGATION */
     header {
       background: var(--bg-card);
-      border-bottom: 3px solid var(--border);
-      padding: 15px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      border-bottom: 3px double var(--border);
+      padding: 20px 5%;
+      text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 0px var(--border);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
     }
 
     .logo-container {
@@ -56,54 +62,77 @@
     }
 
     .site-logo {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border: 2px solid var(--border);
+      border-radius: 50%;
       object-fit: cover;
     }
 
     .logo-text {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: bold;
       color: var(--accent);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      text-shadow: 2px 2px var(--border);
+      font-family: 'Times New Roman', serif;
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-retro {
-      padding: 8px 14px;
+    .btn-vintage {
+      padding: 6px 14px;
       background: var(--bg-card);
       color: var(--text-main);
-      border: 2px solid var(--border);
-      font-family: var(--font-retro);
+      border: 1px solid var(--border);
+      font-family: var(--font-vintage);
+      font-size: 0.85rem;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 3px 3px 0px var(--border);
-      transition: all 0.1s;
+      box-shadow: 2px 2px 0px var(--border);
     }
 
-    .btn-retro:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px var(--border);
+    .btn-vintage:active {
+      transform: translate(1px, 1px);
+      box-shadow: 0px 0px 0px var(--border);
     }
 
-    /* CONTAINER */
+    /* TABS DIVISION (MANGA VS ILLUSTRATIONS) */
+    .tab-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-vintage);
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 5px 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* MAIN CONTAINER */
     .container {
       max-width: 800px;
       margin: 30px auto;
       padding: 0 15px;
     }
 
-    /* ADMIN PANEL */
+    /* SORRA PANEL (ADMIN PANEL) */
     .sorra-panel {
       background: var(--bg-card);
-      border: 3px dashed var(--accent);
+      border: 2px dashed var(--accent);
       padding: 20px;
       margin-bottom: 30px;
       display: none;
@@ -112,35 +141,59 @@
     .sorra-panel h3 {
       color: var(--accent);
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
-    /* FEED STYLE LIKE X (TWITTER) */
+    .panel-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .panel-input {
+      padding: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-vintage);
+    }
+
+    /* PAGE TABS CONTENT */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* POST CARD STYLE (TWITTER/X FEED STYLE) */
     .post-card {
       background: var(--bg-card);
-      border: 2px solid var(--border);
-      box-shadow: 5px 5px 0px var(--border);
+      border: 1px solid var(--border);
+      box-shadow: 4px 4px 0px var(--border);
       padding: 20px;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .post-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .author-avatar {
-      width: 50px;
-      height: 50px;
-      border: 2px solid var(--accent);
+      width: 45px;
+      height: 45px;
+      border: 1px solid var(--border);
       border-radius: 50%;
       object-fit: cover;
     }
 
     .post-author-info h4 {
-      color: var(--text-main);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
     }
 
     .post-author-info span {
@@ -148,24 +201,20 @@
       font-size: 0.85rem;
     }
 
-    .post-content {
-      margin-bottom: 15px;
-    }
-
-    .manga-page-img {
+    .post-image {
       width: 100%;
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       margin-top: 10px;
       display: block;
     }
 
-    /* LIKE & REACTION BAR */
+    /* REACTIONS & COMMENTS */
     .action-bar {
       display: flex;
       gap: 20px;
       padding: 10px 0;
-      border-top: 1px dashed var(--border);
-      border-bottom: 1px dashed var(--border);
+      border-top: 1px dotted var(--border);
+      border-bottom: 1px dotted var(--border);
       margin: 15px 0;
     }
 
@@ -173,35 +222,32 @@
       background: none;
       border: none;
       color: var(--text-main);
-      font-family: var(--font-retro);
+      font-family: var(--font-vintage);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 1rem;
     }
 
     .like-btn.active {
       color: var(--accent);
     }
 
-    /* COMMENTS UNDER EACH PAGE/CHAPTER */
     .comments-container {
-      margin-top: 15px;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 15px;
+      background: rgba(0, 0, 0, 0.02);
+      padding: 12px;
       border: 1px solid var(--border);
     }
 
     .comment-list {
       list-style: none;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .comment-item {
-      padding: 6px 0;
+      padding: 4px 0;
       border-bottom: 1px dotted var(--border);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .comment-item strong {
@@ -215,11 +261,11 @@
 
     .comment-input {
       flex: 1;
-      padding: 8px;
+      padding: 6px;
       background: var(--bg-primary);
       border: 1px solid var(--border);
       color: var(--text-main);
-      font-family: var(--font-retro);
+      font-family: var(--font-vintage);
     }
 
     footer {
@@ -227,65 +273,117 @@
       padding: 30px;
       color: var(--text-muted);
       font-size: 0.85rem;
-      border-top: 2px solid var(--border);
+      border-top: 3px double var(--border);
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo-container">
-      <img src="IMG_1903 (1).PNG" id="siteLogoImg" class="site-logo" alt="Logo">
-      <span class="logo-text">SORRA_WORKS_v1.0</span>
+    <div class="header-top">
+      <div class="logo-container">
+        <img src="IMG_1903 (1).PNG" id="siteLogoImg" class="site-logo" alt="Logo">
+        <span class="logo-text">SORRA WORKS</span>
+      </div>
+
+      <div>
+        <button class="btn-vintage" onclick="toggleTheme()">THEME</button>
+        <button class="btn-vintage" style="border-color: var(--accent);" onclick="loginAdmin()">ADMIN LOGIN</button>
+      </div>
     </div>
 
-    <div class="nav-actions">
-      <button class="btn-retro" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> THEME</button>
-      <button class="btn-retro" style="border-color: var(--accent);" onclick="loginAdmin()"><i class="fa-solid fa-key"></i> ADMIN</button>
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="switchTab('manga-tab', this)"><i class="fa-solid fa-book-open"></i> Manga Stories</button>
+      <button class="tab-btn" onclick="switchTab('art-tab', this)"><i class="fa-solid fa-palette"></i> Art Gallery</button>
     </div>
   </header>
 
   <div class="container">
 
     <div class="sorra-panel" id="sorraPanel">
-      <h3>[SORRA_PANEL // ADMIN_ACCESS]</h3>
-      <p style="font-size: 0.85rem; margin-bottom: 15px;">Control Panel for Sorra K only.</p>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="btn-retro" onclick="changeSiteLogo()">CHANGE LOGO</button>
-        <button class="btn-retro" onclick="changeAvatar()">CHANGE AVATAR</button>
-        <button class="btn-retro" onclick="changeBgColor()">CHANGE RETRO BG</button>
+      <h3>[SORRA PANEL // PUBLISHING CONTROL]</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Manage your site settings and post new artwork or chapters.</p>
+      
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <button class="btn-vintage" onclick="changeSiteLogo()">Change Logo</button>
+        <button class="btn-vintage" onclick="changeAvatar()">Change Avatar</button>
+      </div>
+
+      <div class="panel-form">
+        <h4 style="margin-top: 10px;">Publish New Post:</h4>
+        <select class="panel-input" id="postCategory">
+          <option value="manga-feed">Manga Stories</option>
+          <option value="art-feed">Art Gallery</option>
+        </select>
+        <input type="text" class="panel-input" id="postTitle" placeholder="Title / Caption">
+        <input type="text" class="panel-input" id="postImage" placeholder="Image File Name (e.g. page1.jpg)">
+        <button class="btn-vintage" style="background: var(--accent); color: white;" onclick="createNewPost()">PUBLISH POST</button>
       </div>
     </div>
 
-    <div class="post-card">
-      <div class="post-header">
-        <img src="IMG_1903 (1).PNG" class="author-avatar site-avatar-img" alt="Avatar">
-        <div class="post-author-info">
-          <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
-          <span>@sorra_works • Chapter 1 Release</span>
+    <div id="manga-tab" class="tab-content active">
+      <div id="manga-feed">
+        <div class="post-card">
+          <div class="post-header">
+            <img src="IMG_1903 (1).PNG" class="author-avatar site-avatar-img" alt="Avatar">
+            <div class="post-author-info">
+              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
+              <span>@sorra_works • Manga Series</span>
+            </div>
+          </div>
+
+          <div class="post-content">
+            <p><strong>Chapter 1: A New Beginning [Page 1]</strong></p>
+            <img src="IMG_1903 (1).PNG" class="post-image" alt="Manga Page">
+          </div>
+
+          <div class="action-bar">
+            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>12</span> Hearts</button>
+          </div>
+
+          <div class="comments-container">
+            <ul class="comment-list" id="comments-manga-1">
+              <li class="comment-item"><strong>Reader:</strong> Love this vintage layout!</li>
+            </ul>
+            <div class="comment-box">
+              <input type="text" class="comment-input" id="input-manga-1" placeholder="Leave a comment...">
+              <button class="btn-vintage" onclick="postComment('comments-manga-1', 'input-manga-1')">SEND</button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="post-content">
-        <p>> CHAPTER 1: A NEW BEGINNING [PAGE 1]</p>
-        <img src="IMG_1903 (1).PNG" class="manga-page-img" alt="Manga Page">
-      </div>
+    <div id="art-tab" class="tab-content">
+      <div id="art-feed">
+        <div class="post-card">
+          <div class="post-header">
+            <img src="IMG_1903 (1).PNG" class="author-avatar site-avatar-img" alt="Avatar">
+            <div class="post-author-info">
+              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
+              <span>@sorra_works • Illustration</span>
+            </div>
+          </div>
 
-      <div class="action-bar">
-        <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>15</span> HEARTS</button>
-        <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-thumbs-up"></i> <span>8</span> LIKES</button>
-      </div>
+          <div class="post-content">
+            <p><strong>Illustration Concept #1</strong></p>
+            <img src="IMG_1903 (1).PNG" class="post-image" alt="Art Piece">
+          </div>
 
-      <div class="comments-container">
-        <p style="font-size: 0.85rem; margin-bottom: 10px; color: var(--text-muted);">> PAGE COMMENTS:</p>
-        <ul class="comment-list" id="comments-page-1">
-          <li class="comment-item"><strong>Reader_01:</strong> Awesome art style!</li>
-          <li class="comment-item"><strong>RetroFan:</strong> Love the retro vibes ❤️</li>
-        </ul>
+          <div class="action-bar">
+            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>24</span> Hearts</button>
+          </div>
 
-        <div class="comment-box">
-          <input type="text" class="comment-input" id="input-page-1" placeholder="Type a comment...">
-          <button class="btn-retro" onclick="postComment('comments-page-1', 'input-page-1')">SEND</button>
+          <div class="comments-container">
+            <ul class="comment-list" id="comments-art-1">
+              <li class="comment-item"><strong>ArtLover:</strong> Stunning illustration!</li>
+            </ul>
+            <div class="comment-box">
+              <input type="text" class="comment-input" id="input-art-1" placeholder="Leave a comment...">
+              <button class="btn-vintage" onclick="postComment('comments-art-1', 'input-art-1')">SEND</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -293,32 +391,41 @@
   </div>
 
   <footer>
-    <p>© SORRA WORKS // SYSTEM STATUS: ONLINE</p>
+    <p>© SORRA WORKS // PRINTED & PUBLISHED DIGITAL MAGAZINE</p>
   </footer>
 
   <script>
-    // Theme Switcher (Light / Dark Retro)
+    // Tab Switcher (Chuyển trang Manga Stories / Art Gallery)
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // Toggle Theme (Vintage Light / Dark)
     function toggleTheme() {
       const body = document.documentElement;
-      if (body.getAttribute('data-theme') === 'light') {
-        body.setAttribute('data-theme', 'dark');
+      if (body.getAttribute('data-theme') === 'vintage') {
+        body.setAttribute('data-theme', 'dark-vintage');
       } else {
-        body.setAttribute('data-theme', 'light');
+        body.setAttribute('data-theme', 'vintage');
       }
     }
 
-    // Admin Login for Sorra Panel
+    // Admin Login
     function loginAdmin() {
       const pass = prompt("ENTER ADMIN KEY:");
       if (pass === "sorra123") {
-        alert("WELCOME SORRA K. ACCESS GRANTED.");
+        alert("ACCESS GRANTED. Sorra Panel Unlocked.");
         document.getElementById('sorraPanel').style.display = 'block';
       } else if (pass !== null) {
         alert("ACCESS DENIED.");
       }
     }
 
-    // Admin Functions
+    // Change Logo & Avatar
     function changeSiteLogo() {
       const img = prompt("Enter Logo Image File Name:");
       if (img) document.getElementById('siteLogoImg').src = img;
@@ -331,12 +438,53 @@
       }
     }
 
-    function changeBgColor() {
-      const color = prompt("Enter Retro Background Hex Code (e.g., #050508):");
-      if (color) document.documentElement.style.setProperty('--bg-primary', color);
+    // Admin Action: Create New Post Directly on Site
+    function createNewPost() {
+      const category = document.getElementById('postCategory').value;
+      const title = document.getElementById('postTitle').value.trim();
+      const img = document.getElementById('postImage').value.trim();
+
+      if (!title || !img) {
+        alert("Please enter both a Title and an Image file name.");
+        return;
+      }
+
+      const postId = 'post-' + Date.now();
+      const postHTML = `
+        <div class="post-card">
+          <div class="post-header">
+            <img src="${document.getElementById('siteLogoImg').src}" class="author-avatar site-avatar-img" alt="Avatar">
+            <div class="post-author-info">
+              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
+              <span>@sorra_works • Just Now</span>
+            </div>
+          </div>
+          <div class="post-content">
+            <p><strong>${title}</strong></p>
+            <img src="${img}" class="post-image" alt="Post Image">
+          </div>
+          <div class="action-bar">
+            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>0</span> Hearts</button>
+          </div>
+          <div class="comments-container">
+            <ul class="comment-list" id="comments-${postId}"></ul>
+            <div class="comment-box">
+              <input type="text" class="comment-input" id="input-${postId}" placeholder="Leave a comment...">
+              <button class="btn-vintage" onclick="postComment('comments-${postId}', 'input-${postId}')">SEND</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById(category).insertAdjacentHTML('afterbegin', postHTML);
+      alert("Post published successfully!");
+
+      // Clear Inputs
+      document.getElementById('postTitle').value = '';
+      document.getElementById('postImage').value = '';
     }
 
-    // Reader Interaction: Likes/Hearts
+    // Interaction: Like
     function addHeart(btn) {
       const count = btn.querySelector('span');
       let val = parseInt(count.textContent);
@@ -351,7 +499,7 @@
       }
     }
 
-    // Reader Interaction: Comments under each page
+    // Interaction: Comments
     function postComment(listId, inputId) {
       const input = document.getElementById(inputId);
       const text = input.value.trim();
@@ -359,7 +507,7 @@
         const ul = document.getElementById(listId);
         const li = document.createElement('li');
         li.className = 'comment-item';
-        li.innerHTML = `<strong>Viewer:</strong> ${text}`;
+        li.innerHTML = `<strong>Reader:</strong> ${text}`;
         ul.appendChild(li);
         input.value = "";
       }
