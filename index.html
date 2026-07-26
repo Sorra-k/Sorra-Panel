@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORRA Works</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img id="site-logo" src="https://via.placeholder.com/50" alt="SORRA Works Logo">
+            <h1 id="site-title">SORRA Works</h1>
+        </div>
+        <nav>
+            <button onclick="switchTab('manga')">Manga & Comics</button>
+            <button onclick="switchTab('illustration')">Illustration Art</button>
+            <button id="admin-btn" onclick="toggleAdminPanel()">Admin Panel</button>
+        </nav>
+    </header>
+
+    <section id="admin-panel" class="hidden">
+        <h2>Admin Management Panel</h2>
+        <div id="login-form">
+            <h3>Admin Login</h3>
+            <input type="email" id="admin-email" placeholder="Admin Email">
+            <input type="password" id="admin-pass" placeholder="Password">
+            <button onclick="loginAdmin()">Log In</button>
+        </div>
+
+        <div id="upload-form" class="hidden">
+            <h3>Publish New Content</h3>
+            <select id="post-type">
+                <option value="manga">Publish Manga (MangaDex Style)</option>
+                <option value="art">Publish Illustration</option>
+            </select>
+            <input type="text" id="post-title" placeholder="Title">
+            <textarea id="post-desc" placeholder="Detailed description..."></textarea>
+            <input type="text" id="post-image-url" placeholder="Image/Cover URL">
+            <button onclick="createPost()">Publish Post</button>
+            <button onclick="logoutAdmin()">Log Out</button>
+        </div>
+    </section>
+
+    <main id="manga-section" class="tab-content">
+        <h2>Manga Collection</h2>
+        <div class="manga-grid" id="manga-container">
+            </div>
+    </main>
+
+    <main id="illustration-section" class="tab-content hidden">
+        <h2>Illustration Gallery</h2>
+        <div class="illustration-grid" id="illustration-container">
+            </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    
+    <script src="app.js"></script>
+</body>
+</html>
