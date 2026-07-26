@@ -1,518 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="vintage">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SORRA WORKS // VINTAGE PRESS</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    /* STYLES THEO PHONG CÁCH VINTAGE MAGAZINE */
-    :root {
-      --bg-primary: #f4ebd9;
-      --bg-card: #fffcf0;
-      --text-main: #2b261f;
-      --text-muted: #706351;
-      --accent: #8b261d; /* Màu đỏ đô vintage */
-      --border: #2b261f;
-      --font-vintage: 'Georgia', 'Times New Roman', serif;
-    }
-
-    [data-theme="dark-vintage"] {
-      --bg-primary: #1c1a17;
-      --bg-card: #26231e;
-      --text-main: #e8ded1;
-      --text-muted: #a69886;
-      --accent: #d9534f;
-      --border: #e8ded1;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font-vintage);
-      background-color: var(--bg-primary);
-      color: var(--text-main);
-      line-height: 1.6;
-      transition: all 0.3s ease;
-    }
-
-    /* HEADER & NAVIGATION */
-    header {
-      background: var(--bg-card);
-      border-bottom: 3px double var(--border);
-      padding: 20px 5%;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .site-logo {
-      width: 45px;
-      height: 45px;
-      border: 2px solid var(--border);
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .logo-text {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: var(--accent);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-family: 'Times New Roman', serif;
-    }
-
-    .btn-vintage {
-      padding: 6px 14px;
-      background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      font-family: var(--font-vintage);
-      font-size: 0.85rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 2px 2px 0px var(--border);
-    }
-
-    .btn-vintage:active {
-      transform: translate(1px, 1px);
-      box-shadow: 0px 0px 0px var(--border);
-    }
-
-    /* TABS DIVISION (MANGA VS ILLUSTRATIONS) */
-    .tab-navigation {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      font-family: var(--font-vintage);
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 5px 15px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-    }
-
-    /* MAIN CONTAINER */
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 0 15px;
-    }
-
-    /* SORRA PANEL (ADMIN PANEL) */
-    .sorra-panel {
-      background: var(--bg-card);
-      border: 2px dashed var(--accent);
-      padding: 20px;
-      margin-bottom: 30px;
-      display: none;
-    }
-
-    .sorra-panel h3 {
-      color: var(--accent);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .panel-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .panel-input {
-      padding: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-primary);
-      color: var(--text-main);
-      font-family: var(--font-vintage);
-    }
-
-    /* PAGE TABS CONTENT */
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* POST CARD STYLE (TWITTER/X FEED STYLE) */
-    .post-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      box-shadow: 4px 4px 0px var(--border);
-      padding: 20px;
-      margin-bottom: 30px;
-    }
-
-    .post-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .author-avatar {
-      width: 45px;
-      height: 45px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .post-author-info h4 {
-      font-size: 1.05rem;
-    }
-
-    .post-author-info span {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .post-image {
-      width: 100%;
-      border: 1px solid var(--border);
-      margin-top: 10px;
-      display: block;
-    }
-
-    /* REACTIONS & COMMENTS */
-    .action-bar {
-      display: flex;
-      gap: 20px;
-      padding: 10px 0;
-      border-top: 1px dotted var(--border);
-      border-bottom: 1px dotted var(--border);
-      margin: 15px 0;
-    }
-
-    .like-btn {
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-family: var(--font-vintage);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .like-btn.active {
-      color: var(--accent);
-    }
-
-    .comments-container {
-      background: rgba(0, 0, 0, 0.02);
-      padding: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .comment-list {
-      list-style: none;
-      margin-bottom: 10px;
-    }
-
-    .comment-item {
-      padding: 4px 0;
-      border-bottom: 1px dotted var(--border);
-      font-size: 0.88rem;
-    }
-
-    .comment-item strong {
-      color: var(--accent);
-    }
-
-    .comment-box {
-      display: flex;
-      gap: 8px;
-    }
-
-    .comment-input {
-      flex: 1;
-      padding: 6px;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      font-family: var(--font-vintage);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 3px double var(--border);
-      margin-top: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORRA Works</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <div class="header-top">
-      <div class="logo-container">
-        <img src="IMG_1903 (1).PNG" id="siteLogoImg" class="site-logo" alt="Logo">
-        <span class="logo-text">SORRA WORKS</span>
-      </div>
-
-      <div>
-        <button class="btn-vintage" onclick="toggleTheme()">THEME</button>
-        <button class="btn-vintage" style="border-color: var(--accent);" onclick="loginAdmin()">ADMIN LOGIN</button>
-      </div>
-    </div>
-
-    <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('manga-tab', this)"><i class="fa-solid fa-book-open"></i> Manga Stories</button>
-      <button class="tab-btn" onclick="switchTab('art-tab', this)"><i class="fa-solid fa-palette"></i> Art Gallery</button>
-    </div>
-  </header>
-
-  <div class="container">
-
-    <div class="sorra-panel" id="sorraPanel">
-      <h3>[SORRA PANEL // PUBLISHING CONTROL]</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted);">Manage your site settings and post new artwork or chapters.</p>
-      
-      <div style="display: flex; gap: 8px; margin-top: 10px;">
-        <button class="btn-vintage" onclick="changeSiteLogo()">Change Logo</button>
-        <button class="btn-vintage" onclick="changeAvatar()">Change Avatar</button>
-      </div>
-
-      <div class="panel-form">
-        <h4 style="margin-top: 10px;">Publish New Post:</h4>
-        <select class="panel-input" id="postCategory">
-          <option value="manga-feed">Manga Stories</option>
-          <option value="art-feed">Art Gallery</option>
-        </select>
-        <input type="text" class="panel-input" id="postTitle" placeholder="Title / Caption">
-        <input type="text" class="panel-input" id="postImage" placeholder="Image File Name (e.g. page1.jpg)">
-        <button class="btn-vintage" style="background: var(--accent); color: white;" onclick="createNewPost()">PUBLISH POST</button>
-      </div>
-    </div>
-
-    <div id="manga-tab" class="tab-content active">
-      <div id="manga-feed">
-        <div class="post-card">
-          <div class="post-header">
-            <img src="IMG_1903 (1).PNG" class="author-avatar site-avatar-img" alt="Avatar">
-            <div class="post-author-info">
-              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
-              <span>@sorra_works • Manga Series</span>
-            </div>
-          </div>
-
-          <div class="post-content">
-            <p><strong>Chapter 1: A New Beginning [Page 1]</strong></p>
-            <img src="IMG_1903 (1).PNG" class="post-image" alt="Manga Page">
-          </div>
-
-          <div class="action-bar">
-            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>12</span> Hearts</button>
-          </div>
-
-          <div class="comments-container">
-            <ul class="comment-list" id="comments-manga-1">
-              <li class="comment-item"><strong>Reader:</strong> Love this vintage layout!</li>
-            </ul>
-            <div class="comment-box">
-              <input type="text" class="comment-input" id="input-manga-1" placeholder="Leave a comment...">
-              <button class="btn-vintage" onclick="postComment('comments-manga-1', 'input-manga-1')">SEND</button>
-            </div>
-          </div>
+    <header class="navbar">
+        <div class="logo-container">
+            <img id="site-logo" src="https://via.placeholder.com/50" alt="SORRA Works Logo">
+            <h1 id="site-title">SORRA Works</h1>
         </div>
-      </div>
-    </div>
+        <nav>
+            <button onclick="switchTab('manga')">Truyện Tranh (Manga)</button>
+            <button onclick="switchTab('pinterest')">Góc Art (Pinterest)</button>
+            <button id="admin-btn" onclick="toggleAdminPanel()">Admin Panel</button>
+        </nav>
+    </header>
 
-    <div id="art-tab" class="tab-content">
-      <div id="art-feed">
-        <div class="post-card">
-          <div class="post-header">
-            <img src="IMG_1903 (1).PNG" class="author-avatar site-avatar-img" alt="Avatar">
-            <div class="post-author-info">
-              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
-              <span>@sorra_works • Illustration</span>
-            </div>
-          </div>
-
-          <div class="post-content">
-            <p><strong>Illustration Concept #1</strong></p>
-            <img src="IMG_1903 (1).PNG" class="post-image" alt="Art Piece">
-          </div>
-
-          <div class="action-bar">
-            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>24</span> Hearts</button>
-          </div>
-
-          <div class="comments-container">
-            <ul class="comment-list" id="comments-art-1">
-              <li class="comment-item"><strong>ArtLover:</strong> Stunning illustration!</li>
-            </ul>
-            <div class="comment-box">
-              <input type="text" class="comment-input" id="input-art-1" placeholder="Leave a comment...">
-              <button class="btn-vintage" onclick="postComment('comments-art-1', 'input-art-1')">SEND</button>
-            </div>
-          </div>
+    <section id="admin-panel" class="hidden">
+        <h2>Bảng Quản Trị Admin</h2>
+        <div id="login-form">
+            <h3>Đăng nhập Admin</h3>
+            <input type="email" id="admin-email" placeholder="Email Admin">
+            <input type="password" id="admin-pass" placeholder="Mật khẩu">
+            <button onclick="loginAdmin()">Đăng nhập</button>
         </div>
-      </div>
-    </div>
 
-  </div>
-
-  <footer>
-    <p>© SORRA WORKS // PRINTED & PUBLISHED DIGITAL MAGAZINE</p>
-  </footer>
-
-  <script>
-    // Tab Switcher (Chuyển trang Manga Stories / Art Gallery)
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      
-      document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
-    }
-
-    // Toggle Theme (Vintage Light / Dark)
-    function toggleTheme() {
-      const body = document.documentElement;
-      if (body.getAttribute('data-theme') === 'vintage') {
-        body.setAttribute('data-theme', 'dark-vintage');
-      } else {
-        body.setAttribute('data-theme', 'vintage');
-      }
-    }
-
-    // Admin Login
-    function loginAdmin() {
-      const pass = prompt("ENTER ADMIN KEY:");
-      if (pass === "sorra123") {
-        alert("ACCESS GRANTED. Sorra Panel Unlocked.");
-        document.getElementById('sorraPanel').style.display = 'block';
-      } else if (pass !== null) {
-        alert("ACCESS DENIED.");
-      }
-    }
-
-    // Change Logo & Avatar
-    function changeSiteLogo() {
-      const img = prompt("Enter Logo Image File Name:");
-      if (img) document.getElementById('siteLogoImg').src = img;
-    }
-
-    function changeAvatar() {
-      const img = prompt("Enter Avatar Image File Name:");
-      if (img) {
-        document.querySelectorAll('.site-avatar-img').forEach(el => el.src = img);
-      }
-    }
-
-    // Admin Action: Create New Post Directly on Site
-    function createNewPost() {
-      const category = document.getElementById('postCategory').value;
-      const title = document.getElementById('postTitle').value.trim();
-      const img = document.getElementById('postImage').value.trim();
-
-      if (!title || !img) {
-        alert("Please enter both a Title and an Image file name.");
-        return;
-      }
-
-      const postId = 'post-' + Date.now();
-      const postHTML = `
-        <div class="post-card">
-          <div class="post-header">
-            <img src="${document.getElementById('siteLogoImg').src}" class="author-avatar site-avatar-img" alt="Avatar">
-            <div class="post-author-info">
-              <h4>Sorra K <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i></h4>
-              <span>@sorra_works • Just Now</span>
-            </div>
-          </div>
-          <div class="post-content">
-            <p><strong>${title}</strong></p>
-            <img src="${img}" class="post-image" alt="Post Image">
-          </div>
-          <div class="action-bar">
-            <button class="like-btn" onclick="addHeart(this)"><i class="fa-regular fa-heart"></i> <span>0</span> Hearts</button>
-          </div>
-          <div class="comments-container">
-            <ul class="comment-list" id="comments-${postId}"></ul>
-            <div class="comment-box">
-              <input type="text" class="comment-input" id="input-${postId}" placeholder="Leave a comment...">
-              <button class="btn-vintage" onclick="postComment('comments-${postId}', 'input-${postId}')">SEND</button>
-            </div>
-          </div>
+        <div id="upload-form" class="hidden">
+            <h3>Đăng Nội Dung Mới</h3>
+            <select id="post-type">
+                <option value="manga">Đăng Truyện (MangaDex Style)</option>
+                <option value="art">Đăng Ảnh (Pinterest Style)</option>
+            </select>
+            <input type="text" id="post-title" placeholder="Tiêu đề">
+            <textarea id="post-desc" placeholder="Mô tả chi tiết..."></textarea>
+            <input type="text" id="post-image-url" placeholder="Link ảnh/bìa (URL)">
+            <button onclick="createPost()">Đăng bài</button>
+            <button onclick="logoutAdmin()">Đăng xuất</button>
         </div>
-      `;
+    </section>
 
-      document.getElementById(category).insertAdjacentHTML('afterbegin', postHTML);
-      alert("Post published successfully!");
+    <main id="manga-section" class="tab-content">
+        <h2>Danh Sách Truyện</h2>
+        <div class="manga-grid" id="manga-container">
+            </div>
+    </main>
 
-      // Clear Inputs
-      document.getElementById('postTitle').value = '';
-      document.getElementById('postImage').value = '';
-    }
+    <main id="pinterest-section" class="tab-content hidden">
+        <h2>Thư Viện Tranh Art</h2>
+        <div class="pin-grid" id="pinterest-container">
+            </div>
+    </main>
 
-    // Interaction: Like
-    function addHeart(btn) {
-      const count = btn.querySelector('span');
-      let val = parseInt(count.textContent);
-      if (!btn.classList.contains('active')) {
-        btn.classList.add('active');
-        btn.querySelector('i').className = 'fa-solid fa-heart';
-        count.textContent = val + 1;
-      } else {
-        btn.classList.remove('active');
-        btn.querySelector('i').className = 'fa-regular fa-heart';
-        count.textContent = val - 1;
-      }
-    }
-
-    // Interaction: Comments
-    function postComment(listId, inputId) {
-      const input = document.getElementById(inputId);
-      const text = input.value.trim();
-      if (text !== "") {
-        const ul = document.getElementById(listId);
-        const li = document.createElement('li');
-        li.className = 'comment-item';
-        li.innerHTML = `<strong>Reader:</strong> ${text}`;
-        ul.appendChild(li);
-        input.value = "";
-      }
-    }
-  </script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    
+    <script src="app.js"></script>
 </body>
 </html>
