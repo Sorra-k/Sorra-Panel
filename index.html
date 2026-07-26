@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SorraWorks | Author Portfolio</title>
+  <title>Sorra Works | Official Portfolio</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
@@ -60,12 +60,12 @@
     }
 
     .author-avatar {
-  width: 120px;  /* Thay đổi chiều rộng (ví dụ: 150px nếu muốn to hơn) */
-  height: 120px; /* Thay đổi chiều cao (giữ nguyên bằng width để ảnh luôn tròn) */
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--accent);
-  flex-shrink: 0;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      flex-shrink: 0;
     }
 
     .author-info h1 {
@@ -88,6 +88,34 @@
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 10px;
+    }
+
+    /* Social Media Links */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #24242c;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      border: 1px solid #33333f;
+    }
+
+    .social-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-3px);
     }
 
     /* Main Content Container */
@@ -215,26 +243,38 @@
         flex-direction: column;
         text-align: center;
       }
+      .social-links {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo"><i class="fa-solid fa-book-open"></i> Manga Studio</div>
+    <div class="logo"><i class="fa-solid fa-paintbrush"></i> Sorra Works</div>
   </header>
 
   <div class="hero">
-    <img src="IMG_1903 (1).PNG" alt="Author Avatar" class="author-avatar">
+    <img src="IMG_1903 (1).PNG" alt="Sorra K Avatar" class="author-avatar">
+    
     <div class="author-info">
-      <span class="badge">INDEPENDENT CREATOR</span>
-      <h1>My Manga Corner</h1>
-      <p>Welcome to my personal webcomic hub! Here you'll find all my original manga and illustration projects.</p>
+      <span class="badge">MANGA ARTIST & ILLUSTRATOR</span>
+      <h1>Sorra K</h1>
+      <p>Welcome to Sorra Works! You can explore all my illustrations and manga created by Sorra K right here. Follow my work across other platforms below!</p>
+      
+      <div class="social-links">
+        <a href="https://x.com" target="_blank" class="social-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://pixiv.net" target="_blank" class="social-btn" title="Pixiv"><i class="fa-solid fa-palette"></i></a>
+        <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://discord.com" target="_blank" class="social-btn" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <h2 class="section-title">Latest Work</h2>
+    <h2 class="section-title">Latest Works</h2>
     
     <div class="manga-grid">
       <div class="manga-card">
@@ -262,7 +302,7 @@
   </div>
 
   <footer>
-    <p>© Personal Manga Studio. Optimized for reader experience.</p>
+    <p>© Sorra Works by Sorra K. All rights reserved.</p>
   </footer>
 
 </body>
