@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sorra Works | Official Manga & Art Platform</title>
+  <title>Sorra Works | Official Platform</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* CSS Variables for Light & Dark Mode */
     :root {
       --bg-primary: #0f0f12;
       --bg-card: #18181c;
@@ -34,7 +33,7 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    /* Header */
+    /* Navigation Bar */
     header {
       background: var(--bg-card);
       border-bottom: 1px solid var(--border);
@@ -114,7 +113,28 @@
       padding: 0 20px;
     }
 
-    /* Hero / Creator Profile */
+    /* Sorra Panel (Khung quản trị ẩn) */
+    .sorra-panel {
+      background: var(--bg-card);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: none; /* Mặc định ẩn với người xem */
+    }
+
+    .sorra-panel h3 {
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .admin-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Creator Profile */
     .hero {
       background: var(--bg-card);
       border-radius: 16px;
@@ -143,28 +163,7 @@
       font-weight: 600;
     }
 
-    /* Sorra Panel (Admin Only Dashboard) */
-    .admin-panel {
-      background: var(--bg-card);
-      border: 2px dashed var(--accent);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 30px;
-      display: none; /* Hidden by default for regular viewers */
-    }
-
-    .admin-panel h3 {
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .admin-controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    /* Content Cards */
+    /* Grid layout */
     .content-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -191,7 +190,7 @@
       padding: 12px;
     }
 
-    /* Like / Reactions Bar */
+    /* Reactions & Like */
     .reaction-bar {
       display: flex;
       gap: 15px;
@@ -237,13 +236,6 @@
       color: var(--text-main);
     }
 
-    .sticker-btn {
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
     footer {
       text-align: center;
       padding: 30px;
@@ -258,7 +250,7 @@
   <header>
     <div class="logo-container">
       <img src="IMG_1903 (1).PNG" id="siteLogoImg" class="site-logo" alt="Logo">
-      <span class="logo-text" id="siteNameText">Sorra Works</span>
+      <span class="logo-text">Sorra Works</span>
     </div>
 
     <nav>
@@ -276,15 +268,11 @@
 
   <div class="container">
 
-    <div class="admin-panel" id="sorraPanel">
-      <h3><i class="fa-solid fa-sliders"></i> Sorra Panel (Owner Control)</h3>
-      <p style="font-size: 0.85rem; margin-bottom: 15px; color: var(--text-muted);">Only you can see this panel after entering the admin key.</p>
-      
+    <div class="sorra-panel" id="sorraPanel">
+      <h3><i class="fa-solid fa-sliders"></i> Sorra Panel</h3>
       <div class="admin-controls">
         <button class="btn" onclick="changeSiteLogo()"><i class="fa-solid fa-image"></i> Change Logo</button>
         <button class="btn" onclick="changeAvatar()"><i class="fa-solid fa-user-pen"></i> Change Avatar</button>
-        <button class="btn"><i class="fa-solid fa-plus"></i> Add New Manga</button>
-        <button class="btn"><i class="fa-solid fa-upload"></i> Upload Art</button>
       </div>
     </div>
 
@@ -308,7 +296,6 @@
         <div class="card-info">
           <h3 style="font-size: 1rem;">My First Manga</h3>
           <p style="color: var(--text-muted); font-size: 0.8rem;">Chapter 1 • Original Work</p>
-          
           <div class="reaction-bar">
             <button class="reaction-btn" onclick="addLike(this)"><i class="fa-regular fa-heart"></i> <span>12</span></button>
             <button class="reaction-btn" onclick="addLike(this)"><i class="fa-regular fa-thumbs-up"></i> <span>8</span></button>
@@ -324,7 +311,6 @@
         <div class="card-info">
           <h3 style="font-size: 1rem;">Illustration Concept #1</h3>
           <p style="color: var(--text-muted); font-size: 0.8rem;">By Sorra K</p>
-          
           <div class="reaction-bar">
             <button class="reaction-btn" onclick="addLike(this)"><i class="fa-regular fa-heart"></i> <span>25</span></button>
           </div>
@@ -334,11 +320,8 @@
 
     <div class="comments-section">
       <h3><i class="fa-regular fa-comments"></i> Reader Discussion</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted);">Leave a comment, meme, or sticker below! (No registration needed)</p>
-
       <div class="comment-input-box">
         <input type="text" class="comment-input" placeholder="Write a comment...">
-        <button class="sticker-btn" title="Add Sticker/Meme">😊</button>
         <button class="btn">Post</button>
       </div>
     </div>
@@ -350,7 +333,7 @@
   </footer>
 
   <script>
-    // Theme Switcher (Light / Dark)
+    // Đổi giao diện Sáng / Tối
     function toggleTheme() {
       const body = document.documentElement;
       if (body.getAttribute('data-theme') === 'light') {
@@ -360,44 +343,39 @@
       }
     }
 
-    // Secret Admin Login for Sorra Panel
+    // Mở Sorra Panel bằng mật khẩu
     function loginAdmin() {
-      const password = prompt("Enter Sorra Panel Admin Key:");
-      if (password === "sorra123") { // Default password
-        alert("Welcome, Sorra K! Sorra Panel unlocked.");
+      const pass = prompt("Enter Admin Key:");
+      if (pass === "sorra123") {
+        alert("Sorra Panel unlocked!");
         document.getElementById('sorraPanel').style.display = 'block';
-      } else if (password !== null) {
-        alert("Incorrect Admin Key.");
+      } else if (pass !== null) {
+        alert("Incorrect Key.");
       }
     }
 
-    // Admin Action: Change Logo
+    // Đổi Logo
     function changeSiteLogo() {
-      const newLogoUrl = prompt("Enter new Logo Image File Name or URL:");
-      if (newLogoUrl) {
-        document.getElementById('siteLogoImg').src = newLogoUrl;
-      }
+      const newLogo = prompt("Enter Logo image file name (e.g. logo.png):");
+      if (newLogo) document.getElementById('siteLogoImg').src = newLogo;
     }
 
-    // Admin Action: Change Avatar
+    // Đổi Avatar
     function changeAvatar() {
-      const newAvatarUrl = prompt("Enter new Avatar Image File Name or URL:");
-      if (newAvatarUrl) {
-        document.getElementById('authorAvatarImg').src = newAvatarUrl;
-      }
+      const newAvatar = prompt("Enter Avatar image file name (e.g. avatar.png):");
+      if (newAvatar) document.getElementById('authorAvatarImg').src = newAvatar;
     }
 
-    // Reader Reaction Handler
+    // Nút Thả Tim / Like cho người xem
     function addLike(btn) {
-      const countSpan = btn.querySelector('span');
-      let currentLikes = parseInt(countSpan.textContent);
-      
+      const count = btn.querySelector('span');
+      let val = parseInt(count.textContent);
       if (!btn.classList.contains('active')) {
         btn.classList.add('active');
-        countSpan.textContent = currentLikes + 1;
+        count.textContent = val + 1;
       } else {
         btn.classList.remove('active');
-        countSpan.textContent = currentLikes - 1;
+        count.textContent = val - 1;
       }
     }
   </script>
