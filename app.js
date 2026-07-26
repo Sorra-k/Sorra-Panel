@@ -1,11 +1,12 @@
-// Paste your Firebase Config configuration here
+// SORRA Works Firebase Configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+  apiKey: "AIzaSyB1xGcKVI4Ty23cVDY8CHYRi6AEk-Sxj3U",
+  authDomain: "sorra-works.firebaseapp.com",
+  projectId: "sorra-works",
+  storageBucket: "sorra-works.firebasestorage.app",
+  messagingSenderId: "646064583120",
+  appId: "1:646064583120:web:7d3f8728f9476f800849d5",
+  measurementId: "G-JRBM2MQR9C"
 };
 
 // Initialize Firebase
@@ -30,8 +31,13 @@ function toggleAdminPanel() {
 
 // Admin Login Handler
 function loginAdmin() {
-    const email = document.getElementById('admin-email').value;
-    const pass = document.getElementById('admin-pass').value;
+    const email = document.getElementById('admin-email').value.trim();
+    const pass = document.getElementById('admin-pass').value.trim();
+
+    if(!email || !pass) {
+        alert("Please enter both email and password.");
+        return;
+    }
 
     auth.signInWithEmailAndPassword(email, pass)
         .then(() => {
@@ -39,7 +45,9 @@ function loginAdmin() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('upload-form').classList.remove('hidden');
         })
-        .catch(err => alert("Login Error: " + err.message));
+        .catch(err => {
+            alert("Login Error: " + err.message);
+        });
 }
 
 function logoutAdmin() {
@@ -78,6 +86,8 @@ function createPost() {
         document.getElementById('post-title').value = '';
         document.getElementById('post-desc').value = '';
         document.getElementById('post-image-url').value = '';
+    }).catch(err => {
+        alert("Error publishing post: " + err.message);
     });
 }
 
@@ -102,7 +112,7 @@ db.collection("posts").orderBy("createdAt", "desc").onSnapshot(snapshot => {
                     <h3>${data.title}</h3>
                     <p>${data.desc}</p>
                     <div class="interaction-bar">
-                        <button class="like-btn" onclick="toggleLike('${id}', ${data.likes})">
+                        <button class="like-btn" onclick="toggleLike('${id}')">
                             ❤️ <span id="like-count-${id}">${data.likes || 0}</span>
                         </button>
                     </div>
@@ -115,7 +125,7 @@ db.collection("posts").orderBy("createdAt", "desc").onSnapshot(snapshot => {
                     <h3>${data.title}</h3>
                     <p>${data.desc}</p>
                     <div class="interaction-bar">
-                        <button class="like-btn" onclick="toggleLike('${id}', ${data.likes})">
+                        <button class="like-btn" onclick="toggleLike('${id}')">
                             ❤️ <span id="like-count-${id}">${data.likes || 0}</span>
                         </button>
                     </div>
@@ -126,7 +136,7 @@ db.collection("posts").orderBy("createdAt", "desc").onSnapshot(snapshot => {
 });
 
 // Like and Unlike Toggle
-function toggleLike(postId, currentLikes) {
+function toggleLike(postId) {
     const hasLiked = localStorage.getItem(`liked_${postId}`);
     const postRef = db.collection("posts").doc(postId);
 
@@ -138,18 +148,3 @@ function toggleLike(postId, currentLikes) {
         localStorage.setItem(`liked_${postId}`, 'true');
     }
 }
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
- const firebaseConfig = {
-    apiKey: "AIzaSy...",
-    authDomain: "sorra-works.firebaseapp.com",
-    projectId: "sorra-works",
-    storageBucket: "sorra-works.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef..."
-};
